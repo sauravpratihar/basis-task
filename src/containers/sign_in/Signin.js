@@ -3,28 +3,47 @@ import Layout from "../../components/Layout";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { userActions } from "../../redux/actions/userAction";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { OTP, PROFILE } from "../../helper/routes"
 
-export default class Signin extends Component {
+class Signin extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
     this.state = {
-        email: ""
+      email: "",
+      loading: false
     };
   }
 
-  onSubmit = (e) => {
-    e.preventDefault()
-    console.log('clicked')
-    console.log(this.state.email)
+  onSubmit = e => {
+    e.preventDefault();
+    this.setState({ loading: true });
+    userActions
+      .sendOTP({
+        email: this.state.email
+      })
+      .then(data => {
+        this.setState({ loading: false });
+        if (data) {
+          return this.props.history.push(OTP, { email: this.state.email });
+        }
+      })
+      .catch(err => console.log(err));
+  };
+  onEmailChange = e => {
+    this.setState({ email: e.target.value });
+  };
 
-  }
-  onEmailChange =(e) => {
-    this.setState({ email: e.target.value})
-  }
-  
   render() {
-    console.log('state', this.state)
+    if (this.state.loading) {
+      return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><p style={{ textAlign: 'center', }}>Loading...</p></div>;
+    }
+
+    if (localStorage.getItem("token")) {
+      return <Redirect to={PROFILE} />;
+    }
     return (
       <Layout>
         <Typography component="h1" variant="h5">
@@ -50,3 +69,5 @@ export default class Signin extends Component {
     );
   }
 }
+
+export default connect()(Signin);
