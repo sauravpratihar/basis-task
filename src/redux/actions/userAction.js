@@ -6,7 +6,7 @@ const sendOTP = async(data) => {
         if (response.success)
             return true
     } catch (error) {
-        alert('ERROR', error.message);
+        // alert(error.response.data.message)
         return false
     }
 }
@@ -18,7 +18,7 @@ const signin = async(data) => {
             return response.message
 
     } catch (error) {
-        alert('ERROR', error.message);
+        // alert(error.response.data.message)
         return false
     }
 }
@@ -26,11 +26,13 @@ const signin = async(data) => {
 const updateUser = async(data) => {
     try {
         const response = await service.updateUser(data);
+        console.log('resp', response)
         if (response.success)
-            return response.message
+            return response.message            
 
     } catch (error) {
-        alert('ERROR', error.message);
+        console.log('xz,',error)
+        // alert(error.response.data.message)
         return false
     }
 }
@@ -42,7 +44,7 @@ const getUser = async() => {
             return response.message
 
     } catch (error) {
-        alert('ERROR', error.message);
+        // alert(error.response.data.message)
         return false
     }
 }
@@ -54,7 +56,7 @@ const signout = async() => {
             return response.message
 
     } catch (error) {
-        alert('ERROR', error.message);
+        // alert(error.response.data.message)
         return false
     }
 }

@@ -53,7 +53,7 @@ export default class Signup extends Component {
       return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><p style={{ textAlign: 'center', }}>Loading...</p></div>;
     }
 
-    const { first_name, last_name, referral_code, email } = this.state.user;
+    const { first_name, last_name, referral_code, email, my_referral_code } = this.state.user;
     
     return (
       <Layout>
@@ -75,10 +75,15 @@ export default class Signup extends Component {
                 <ListItem>
                   <Typography component="h2">Last Name: {last_name}</Typography>
                 </ListItem>
+                <ListItem>
+                    <Typography component="h2">
+                      My Referral Code: {my_referral_code}
+                    </Typography>
+                  </ListItem>
                 {referral_code && (
                   <ListItem>
                     <Typography component="h2">
-                      Referral Code: {referral_code}
+                      Applied Referral Code: {referral_code}
                     </Typography>
                   </ListItem>
                 )}

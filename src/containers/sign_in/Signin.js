@@ -21,6 +21,7 @@ class Signin extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    localStorage.setItem('ref', '')
     if(getUrlParameter('ref')){
       localStorage.setItem('ref', getUrlParameter('ref'))
     }

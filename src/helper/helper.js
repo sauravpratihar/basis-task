@@ -13,11 +13,15 @@ export const postNormalized = (url, data) => {
         Authorization : token,
         token: window.localStorage.getItem('token')
       }
-    }).then(res => res.data).catch(err=> {
+    })
+    .then(res => res.data)
+    .catch(err=> {
       if(err.response.status === 403){
         window.location.href = "/sign_in"
       }
       console.log('e', err.response)
+      alert(err.response.data.message)
+      return err
     });
 };
 
