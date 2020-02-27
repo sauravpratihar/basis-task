@@ -7,6 +7,8 @@ import { userActions } from "../../redux/actions/userAction";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { OTP, PROFILE } from "../../helper/routes"
+import { getUrlParameter } from "../../helper/helper"
+
 
 class Signin extends Component {
   constructor(props) {
@@ -19,6 +21,9 @@ class Signin extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    if(getUrlParameter('ref')){
+      localStorage.setItem('ref', getUrlParameter('ref'))
+    }
     this.setState({ loading: true });
     userActions
       .sendOTP({

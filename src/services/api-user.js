@@ -1,4 +1,4 @@
-import * as API from '../helper/api-helper';
+import * as API from '../helper/helper';
 import { API_URL } from '../helper/constant';
 
 export const sendOTP = ({ email }) =>

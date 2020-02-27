@@ -20,8 +20,6 @@ export default class Otp extends Component {
   onSubmit = e => {
     this.setState({ loading: true });
     e.preventDefault();
-    console.log("clicked", this.props.location.state.email);
-    console.log(this.state.otp);
     userActions
       .signin({ email: this.props.location.state.email, otp: this.state.otp })
       .then(data => {

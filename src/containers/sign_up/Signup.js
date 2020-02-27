@@ -12,7 +12,7 @@ export default class Signup extends Component {
     this.state = {
       first_name: "",
       last_name: "",
-      referral: "",
+      referral: localStorage.getItem('ref'),
       loading: false
     };
   }
@@ -31,7 +31,7 @@ export default class Signup extends Component {
       .updateUser({
         first_name: this.state.first_name,
         last_name: this.state.last_name,
-        referral: this.state.referral
+        referral_code: this.state.referral
       })
       .then(data => {
         this.setState({ loading: false})

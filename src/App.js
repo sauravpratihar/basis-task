@@ -5,7 +5,6 @@ import Otp from '../src/containers/otp/Otp';
 import Signup from '../src/containers/sign_up/Signup';
 import Profile from '../src/containers/profile/Profile';
 import { SIGN_IN, OTP, SIGN_UP, PROFILE} from './helper/routes'
-
 const App = () => (
   <Router>
     <div>
