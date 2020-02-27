@@ -7,6 +7,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { userActions } from "../../redux/actions/userAction";
 import { SIGN_IN, SIGN_UP, PROFILE } from "../../helper/routes"
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -15,6 +16,14 @@ export default class Signup extends Component {
       loading: true
     };
   }
+
+  onClick = ({target: {innerHTML}}) => {
+    console.log(`Clicked on "${innerHTML}"!`)
+  };
+
+  onCopy = () => {
+    this.setState({copied: true});
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -78,6 +87,15 @@ export default class Signup extends Component {
                 <ListItem>
                     <Typography component="h2">
                       My Referral Code: {my_referral_code}
+                      <CopyToClipboard
+                        onCopy={this.onCopy}
+                        options={{message: 'Whoa!'}}
+                        text={`http://13.233.43.160:9000/?ref=${my_referral_code}`}>
+                        <Button onClick={this.onClick}>[Copy Referral Link]</Button>
+                      </CopyToClipboard>
+                      <section className="section">
+                        {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null}
+                      </section>
                     </Typography>
                   </ListItem>
                 {referral_code && (
